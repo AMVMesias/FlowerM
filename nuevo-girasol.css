@@ -15,7 +15,7 @@ body {
         #98E4FF 75%, 
         #87CEEB 100%);
     background-size: 400% 400%;
-    animation: fondoMovimiento 8s ease-in-out infinite;
+    animation: fondoMovimiento 8s ease-in-out infinite, aparecerBody 1s ease-out;
     font-family: 'Arial', sans-serif;
     overflow: hidden;
     display: flex;
@@ -27,6 +27,17 @@ body {
 @keyframes fondoMovimiento {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
+}
+
+@keyframes aparecerBody {
+    0% {
+        opacity: 0;
+        filter: brightness(0.3);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
 }
 
 .container {
@@ -47,6 +58,9 @@ body {
     top: 20px;
     right: 20px;
     z-index: 100;
+    animation: aparecerBoton 1.5s ease-out 0.5s;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 .btn-musica {
@@ -73,6 +87,59 @@ body {
     animation: brillarBoton 1s ease-in-out infinite alternate;
 }
 
+/* Mensaje de música */
+.mensaje-musica {
+    position: absolute;
+    top: 50%;
+    right: 110%;
+    transform: translateY(-50%);
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    animation: pulsarMensaje 2s ease-in-out infinite, aparecerMensaje 1s ease-out 2s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    transition: all 0.5s ease;
+}
+
+.mensaje-musica::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-left-color: #FFD700;
+}
+
+/* Mensaje de música centrado */
+.mensaje-musica-centro {
+    text-align: center;
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+    background-size: 200% 200%;
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 15px auto;
+    max-width: 350px;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    animation: 
+        pulsarMensajeCentro 2s ease-in-out infinite,
+        aparecerMensajeCentro 1s ease-out 1.5s,
+        brillarFondo 3s ease-in-out infinite;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    transition: all 0.6s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
 @keyframes pulsarBoton {
     0%, 100% { 
         box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
@@ -91,15 +158,84 @@ body {
     }
 }
 
+@keyframes aparecerBoton {
+    0% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.5);
+        filter: blur(5px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateX(-5px) scale(1.1);
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes pulsarMensaje {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.05);
+        box-shadow: 0 6px 25px rgba(255, 215, 0, 0.7);
+    }
+}
+
+@keyframes pulsarMensajeCentro {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 8px 30px rgba(255, 215, 0, 0.8);
+    }
+}
+
+@keyframes aparecerMensajeCentro {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.8);
+        filter: blur(5px);
+    }
+    70% {
+        opacity: 0.9;
+        transform: translateY(-5px) scale(1.02);
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+    }
+}
+
+@keyframes brillarFondo {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
 /* Mensaje romántico */
 .mensaje-romantico {
     text-align: center;
-    animation: aparecerMensaje 2s ease-out;
+    animation: aparecerMensaje 2.5s ease-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 .texto-amor {
@@ -141,11 +277,23 @@ body {
 @keyframes aparecerMensaje {
     0% {
         opacity: 0;
-        transform: translateY(-50px) scale(0.5);
+        transform: translateY(-80px) scale(0.3);
+        filter: blur(10px);
+    }
+    40% {
+        opacity: 0.7;
+        transform: translateY(-20px) scale(0.8);
+        filter: blur(3px);
+    }
+    70% {
+        opacity: 0.9;
+        transform: translateY(5px) scale(1.05);
+        filter: blur(0px);
     }
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
+        filter: blur(0px);
     }
 }
 
@@ -173,25 +321,40 @@ body {
 /* Girasol contenedor */
 .girasol-contenedor {
     position: relative;
-    animation: crecerGirasol 3s ease-out;
+    animation: crecerGirasol 3s ease-out 1s;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 @keyframes crecerGirasol {
     0% {
-        transform: scale(0) rotate(-180deg);
+        transform: scale(0) translateY(50px);
         opacity: 0;
+        filter: blur(8px);
     }
-    70% {
-        transform: scale(1.1) rotate(0deg);
+    30% {
+        transform: scale(0.5) translateY(20px);
+        opacity: 0.4;
+        filter: blur(4px);
+    }
+    60% {
+        transform: scale(0.9) translateY(-10px);
         opacity: 0.8;
+        filter: blur(1px);
+    }
+    80% {
+        transform: scale(1.1) translateY(0px);
+        opacity: 0.95;
+        filter: blur(0px);
     }
     100% {
-        transform: scale(1) rotate(0deg);
+        transform: scale(1) translateY(0px);
         opacity: 1;
+        filter: blur(0px);
     }
 }
 
@@ -285,7 +448,6 @@ body {
     box-shadow: 
         inset -8px 0 15px rgba(0, 0, 0, 0.2),
         0 3px 10px rgba(255, 140, 0, 0.3);
-    animation: ondularPetalo 4s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.1s);
 }
 
@@ -311,6 +473,15 @@ body {
     }
     75% { 
         transform: rotate(calc(var(--i) * 18deg)) translateX(88px) rotate(12deg) scaleY(0.9);
+    }
+}
+
+@keyframes ondularPetaloSutil {
+    0%, 100% { 
+        transform: rotate(calc(var(--i) * 18deg)) translateX(90px) rotate(15deg) scaleY(1);
+    }
+    50% { 
+        transform: rotate(calc(var(--i) * 18deg)) translateX(90px) rotate(15deg) scaleY(1.02);
     }
 }
 
@@ -383,6 +554,9 @@ body {
     height: 100%;
     pointer-events: none;
     overflow: hidden;
+    animation: aparecerParticulas 2s ease-out 2.5s;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 .particula {
@@ -437,6 +611,36 @@ body {
     }
 }
 
+@keyframes aparecerParticulas {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes aparecerEfectos {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+    }
+    60% {
+        opacity: 0.6;
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
 /* Efectos de fondo mágicos */
 .efectos-fondo {
     position: fixed;
@@ -447,6 +651,9 @@ body {
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
+    animation: aparecerEfectos 3s ease-out 3.5s;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 /* Escarcha brillante */
@@ -728,105 +935,89 @@ body {
 
 @media (max-width: 480px) {
     body {
-        padding: 10px;
+        padding: 5px;
+        overflow: hidden;
     }
     
     .container {
-        padding: 10px;
-        gap: 10px;
+        padding: 5px;
+        gap: 5px;
         height: 100vh;
-        justify-content: space-evenly;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
     }
     
     .control-musica {
         top: 10px;
         right: 10px;
+        z-index: 1000;
     }
     
     .btn-musica {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        border-radius: 20px;
+    }
+    
+    .mensaje-musica {
+        font-size: 0.7rem;
         padding: 6px 12px;
+        right: 120%;
+        border-radius: 15px;
+    }
+    
+    .mensaje-musica::after {
+        border-width: 6px;
+    }
+    
+    .mensaje-musica-centro {
         font-size: 0.8rem;
+        padding: 8px 15px;
+        margin: 10px auto;
+        max-width: 280px;
+        border-radius: 20px;
     }
     
     .mensaje-romantico {
-        margin-bottom: 5px;
-    }
-    
-    .texto-amor {
-        font-size: 2.2rem;
-        letter-spacing: 1px;
-        line-height: 1.2;
-    }
-    
-    .corazones {
-        gap: 12px;
-        margin-top: 5px;
-    }
-    
-    .corazon {
-        font-size: 1.5rem;
-    }
-    
-    .girasol {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .centro-girasol {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .petalo {
-        width: 55px;
-        height: 20px;
-        transform: rotate(calc(var(--i) * 18deg)) translateX(60px) rotate(15deg);
-    }
-    
-    .tallo {
-        height: 150px;
-        margin-top: -20px;
-        width: 10px;
-    }
-    
-    .hoja {
-        width: 40px;
-        height: 20px;
-    }
-    
-    .hoja-izq {
-        top: 60px;
-        left: -28px;
-    }
-    
-    .hoja-der {
-        top: 90px;
-        right: -28px;
-    }
-}
-
-@media (max-width: 360px) {
-    .container {
-        gap: 8px;
-        padding: 8px;
+        margin-bottom: 10px;
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 350px;
     }
     
     .texto-amor {
         font-size: 1.8rem;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
+        line-height: 1.1;
+        margin-bottom: 5px;
     }
     
     .corazones {
         gap: 10px;
+        margin-top: 5px;
     }
     
     .corazon {
         font-size: 1.3rem;
     }
     
+    .girasol-contenedor {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 350px;
+        min-height: 0;
+    }
+    
     .girasol {
-        width: 170px;
-        height: 170px;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
     }
     
     .centro-girasol {
@@ -835,9 +1026,9 @@ body {
     }
     
     .petalo {
-        width: 48px;
+        width: 50px;
         height: 18px;
-        transform: rotate(calc(var(--i) * 18deg)) translateX(50px) rotate(15deg);
+        transform: rotate(calc(var(--i) * 18deg)) translateX(55px) rotate(15deg);
     }
     
     .tallo {
@@ -859,6 +1050,139 @@ body {
     .hoja-der {
         top: 75px;
         right: -25px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        gap: 5px;
+        padding: 5px;
+    }
+    
+    .texto-amor {
+        font-size: 1.5rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .corazones {
+        gap: 8px;
+    }
+    
+    .corazon {
+        font-size: 1.2rem;
+    }
+    
+    .girasol {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .centro-girasol {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .petalo {
+        width: 42px;
+        height: 16px;
+        transform: rotate(calc(var(--i) * 18deg)) translateX(45px) rotate(15deg);
+    }
+    
+    .tallo {
+        height: 100px;
+        margin-top: -12px;
+        width: 6px;
+    }
+    
+    .hoja {
+        width: 30px;
+        height: 15px;
+    }
+    
+    .hoja-izq {
+        top: 40px;
+        left: -20px;
+    }
+    
+    .hoja-der {
+        top: 60px;
+        right: -20px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 320px) {
+    .container {
+        gap: 3px;
+        padding: 3px;
+        height: 100vh;
+        justify-content: center;
+    }
+    
+    .control-musica {
+        top: 5px;
+        right: 5px;
+    }
+    
+    .btn-musica {
+        padding: 4px 8px;
+        font-size: 0.6rem;
+    }
+    
+    .texto-amor {
+        font-size: 1.3rem;
+        letter-spacing: 0px;
+        margin-bottom: 3px;
+    }
+    
+    .corazones {
+        gap: 6px;
+        margin-top: 3px;
+    }
+    
+    .corazon {
+        font-size: 1rem;
+    }
+    
+    .girasol-contenedor {
+        max-width: 300px;
+    }
+    
+    .girasol {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .centro-girasol {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .petalo {
+        width: 38px;
+        height: 14px;
+        transform: rotate(calc(var(--i) * 18deg)) translateX(40px) rotate(15deg);
+    }
+    
+    .tallo {
+        height: 90px;
+        margin-top: -10px;
+        width: 5px;
+    }
+    
+    .hoja {
+        width: 25px;
+        height: 12px;
+    }
+    
+    .hoja-izq {
+        top: 35px;
+        left: -18px;
+    }
+    
+    .hoja-der {
+        top: 50px;
+        right: -18px;
     }
 }
 

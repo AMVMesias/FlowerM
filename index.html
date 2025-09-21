@@ -19,7 +19,7 @@
         </div>
 
         <!-- Audio -->
-        <audio id="musicaFondo" loop>
+        <audio id="musicaFondo" loop autoplay>
             <source src="musica.mp3" type="audio/mpeg">
             <source src="musica.ogg" type="audio/ogg">
             Tu navegador no soporta audio HTML5.
@@ -33,6 +33,11 @@
                 <span class="corazon">💖</span>
                 <span class="corazon">💕</span>
             </div>
+        </div>
+
+        <!-- Mensaje de música centrado -->
+        <div id="mensajeMusica" class="mensaje-musica-centro">
+            🎵 ¡Presiona el botón para activar música! 🎵
         </div>
 
         <!-- Girasol principal -->
@@ -135,6 +140,23 @@
         let musicaReproduciendo = false;
         const audio = document.getElementById('musicaFondo');
         const btnMusica = document.getElementById('btnMusica');
+        const mensajeMusica = document.getElementById('mensajeMusica');
+
+        function ocultarMensaje() {
+            if (mensajeMusica) {
+                mensajeMusica.style.opacity = '0';
+                mensajeMusica.style.transform = 'translateY(20px) scale(0.8)';
+                mensajeMusica.style.filter = 'blur(5px)';
+                setTimeout(() => {
+                    mensajeMusica.style.display = 'none';
+                }, 600);
+            }
+        }
+
+        // Ocultar mensaje automáticamente después de 2 segundos
+        setTimeout(() => {
+            ocultarMensaje();
+        }, 4000);
 
         function toggleMusica() {
             if (musicaReproduciendo) {
@@ -147,23 +169,65 @@
                     btnMusica.innerHTML = '🎵 Pausar';
                     btnMusica.classList.add('reproduciendo');
                     musicaReproduciendo = true;
+                    // Ocultar mensaje inmediatamente si el usuario activa la música
+                    if (mensajeMusica && mensajeMusica.style.display !== 'none') {
+                        ocultarMensaje();
+                    }
                 }).catch(error => {
                     console.log('Error al reproducir audio:', error);
-                    btnMusica.innerHTML = '❌ Error';
+                    btnMusica.innerHTML = '🎵 Música';
                 });
             }
         }
 
-        // Intentar reproducir automáticamente cuando la página carga
-        window.addEventListener('load', function() {
+        // Función para intentar reproducir automáticamente
+        function intentarAutoplay() {
             audio.volume = 0.3; // Volumen al 30%
-            
-            // Intentar reproducir después de una pequeña interacción
-            document.addEventListener('click', function() {
-                if (!musicaReproduciendo) {
-                    toggleMusica();
+            audio.play().then(() => {
+                musicaReproduciendo = true;
+                btnMusica.innerHTML = '🎵 Pausar';
+                btnMusica.classList.add('reproduciendo');
+                // Ocultar mensaje inmediatamente si autoplay funciona
+                if (mensajeMusica && mensajeMusica.style.display !== 'none') {
+                    ocultarMensaje();
                 }
-            }, { once: true });
+                console.log('Autoplay iniciado exitosamente');
+            }).catch(error => {
+                console.log('Autoplay bloqueado por el navegador:', error);
+                btnMusica.innerHTML = '🎵 Música';
+                musicaReproduciendo = false;
+                // El mensaje se ocultará automáticamente después de 2 segundos
+                
+                // Configurar para reproducir en la primera interacción
+                document.addEventListener('click', function() {
+                    if (!musicaReproduciendo) {
+                        toggleMusica();
+                    }
+                }, { once: true });
+                
+                document.addEventListener('touchstart', function() {
+                    if (!musicaReproduciendo) {
+                        toggleMusica();
+                    }
+                }, { once: true });
+            });
+        }
+
+        // Intentar reproducir cuando la página carga
+        window.addEventListener('load', function() {
+            intentarAutoplay();
+        });
+
+        // También intentar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            intentarAutoplay();
+        });
+
+        // Manejar el evento de carga del audio
+        audio.addEventListener('canplaythrough', function() {
+            if (!musicaReproduciendo) {
+                intentarAutoplay();
+            }
         });
     </script>
 </body>
