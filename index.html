@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#87CEEB">
+    <title>🌻 Mayo 💕</title>
+    <link rel="stylesheet" href="nuevo-girasol.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Control de música -->
+        <div class="control-musica">
+            <button id="btnMusica" class="btn-musica" onclick="toggleMusica()">
+                🎵 Música
+            </button>
+        </div>
+
+        <!-- Audio -->
+        <audio id="musicaFondo" loop>
+            <source src="musica.mp3" type="audio/mpeg">
+            <source src="musica.ogg" type="audio/ogg">
+            Tu navegador no soporta audio HTML5.
+        </audio>
+
+        <!-- Mensaje romántico -->
+        <div class="mensaje-romantico">
+            <h1 class="texto-amor">Te amo Mayo</h1>
+            <div class="corazones">
+                <span class="corazon">💕</span>
+                <span class="corazon">💖</span>
+                <span class="corazon">💕</span>
+            </div>
+        </div>
+
+        <!-- Girasol principal -->
+        <div class="girasol-contenedor">
+            <div class="girasol">
+                <!-- Centro del girasol -->
+                <div class="centro-girasol">
+                    <div class="semillas"></div>
+                </div>
+                
+                <!-- Pétalos (generados por CSS) -->
+                <div class="petalos">
+                    <div class="petalo" style="--i: 1"></div>
+                    <div class="petalo" style="--i: 2"></div>
+                    <div class="petalo" style="--i: 3"></div>
+                    <div class="petalo" style="--i: 4"></div>
+                    <div class="petalo" style="--i: 5"></div>
+                    <div class="petalo" style="--i: 6"></div>
+                    <div class="petalo" style="--i: 7"></div>
+                    <div class="petalo" style="--i: 8"></div>
+                    <div class="petalo" style="--i: 9"></div>
+                    <div class="petalo" style="--i: 10"></div>
+                    <div class="petalo" style="--i: 11"></div>
+                    <div class="petalo" style="--i: 12"></div>
+                    <div class="petalo" style="--i: 13"></div>
+                    <div class="petalo" style="--i: 14"></div>
+                    <div class="petalo" style="--i: 15"></div>
+                    <div class="petalo" style="--i: 16"></div>
+                    <div class="petalo" style="--i: 17"></div>
+                    <div class="petalo" style="--i: 18"></div>
+                    <div class="petalo" style="--i: 19"></div>
+                    <div class="petalo" style="--i: 20"></div>
+                </div>
+            </div>
+
+            <!-- Tallo y hojas -->
+            <div class="tallo">
+                <div class="hoja hoja-izq"></div>
+                <div class="hoja hoja-der"></div>
+            </div>
+        </div>
+
+        <!-- Partículas flotantes -->
+        <div class="particulas">
+            <div class="particula"></div>
+            <div class="particula"></div>
+            <div class="particula"></div>
+            <div class="particula"></div>
+            <div class="particula"></div>
+        </div>
+
+        <!-- Efectos de fondo mágicos -->
+        <div class="efectos-fondo">
+            <!-- Escarcha brillante -->
+            <div class="escarcha">
+                <div class="copo copo-1"></div>
+                <div class="copo copo-2"></div>
+                <div class="copo copo-3"></div>
+                <div class="copo copo-4"></div>
+                <div class="copo copo-5"></div>
+                <div class="copo copo-6"></div>
+                <div class="copo copo-7"></div>
+                <div class="copo copo-8"></div>
+                <div class="copo copo-9"></div>
+                <div class="copo copo-10"></div>
+            </div>
+
+            <!-- Estrellas brillantes -->
+            <div class="estrellas">
+                <div class="estrella estrella-1">✨</div>
+                <div class="estrella estrella-2">⭐</div>
+                <div class="estrella estrella-3">🌟</div>
+                <div class="estrella estrella-4">✨</div>
+                <div class="estrella estrella-5">⭐</div>
+                <div class="estrella estrella-6">🌟</div>
+                <div class="estrella estrella-7">✨</div>
+                <div class="estrella estrella-8">⭐</div>
+            </div>
+
+            <!-- Burbujas flotantes -->
+            <div class="burbujas">
+                <div class="burbuja burbuja-1"></div>
+                <div class="burbuja burbuja-2"></div>
+                <div class="burbuja burbuja-3"></div>
+                <div class="burbuja burbuja-4"></div>
+                <div class="burbuja burbuja-5"></div>
+                <div class="burbuja burbuja-6"></div>
+            </div>
+
+            <!-- Rayos de luz -->
+            <div class="rayos-luz">
+                <div class="rayo rayo-1"></div>
+                <div class="rayo rayo-2"></div>
+                <div class="rayo rayo-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let musicaReproduciendo = false;
+        const audio = document.getElementById('musicaFondo');
+        const btnMusica = document.getElementById('btnMusica');
+
+        function toggleMusica() {
+            if (musicaReproduciendo) {
+                audio.pause();
+                btnMusica.innerHTML = '🔇 Música';
+                btnMusica.classList.remove('reproduciendo');
+                musicaReproduciendo = false;
+            } else {
+                audio.play().then(() => {
+                    btnMusica.innerHTML = '🎵 Pausar';
+                    btnMusica.classList.add('reproduciendo');
+                    musicaReproduciendo = true;
+                }).catch(error => {
+                    console.log('Error al reproducir audio:', error);
+                    btnMusica.innerHTML = '❌ Error';
+                });
+            }
+        }
+
+        // Intentar reproducir automáticamente cuando la página carga
+        window.addEventListener('load', function() {
+            audio.volume = 0.3; // Volumen al 30%
+            
+            // Intentar reproducir después de una pequeña interacción
+            document.addEventListener('click', function() {
+                if (!musicaReproduciendo) {
+                    toggleMusica();
+                }
+            }, { once: true });
+        });
+    </script>
+</body>
+</html>

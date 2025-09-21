@@ -1,0 +1,998 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(45deg, 
+        #87CEEB 0%, 
+        #98E4FF 25%, 
+        #B0E0E6 50%, 
+        #98E4FF 75%, 
+        #87CEEB 100%);
+    background-size: 400% 400%;
+    animation: fondoMovimiento 8s ease-in-out infinite;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+@keyframes fondoMovimiento {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+}
+
+/* Control de música */
+.control-musica {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.btn-musica {
+    background: linear-gradient(45deg, #FF1493, #FF69B4);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    transition: all 0.3s ease;
+    animation: pulsarBoton 2s ease-in-out infinite;
+}
+
+.btn-musica:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.5);
+}
+
+.btn-musica.reproduciendo {
+    background: linear-gradient(45deg, #32CD32, #00FF7F);
+    animation: brillarBoton 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulsarBoton {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    }
+    50% { 
+        box-shadow: 0 6px 25px rgba(255, 20, 147, 0.6);
+    }
+}
+
+@keyframes brillarBoton {
+    0% { 
+        box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
+    }
+    100% { 
+        box-shadow: 0 6px 25px rgba(0, 255, 127, 0.7);
+    }
+}
+
+/* Mensaje romántico */
+.mensaje-romantico {
+    text-align: center;
+    animation: aparecerMensaje 2s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.texto-amor {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #FF1493, #FF69B4, #FFB6C1, #FF1493);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textoArcoiris 3s ease-in-out infinite, pulsarTexto 2s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+    letter-spacing: 3px;
+    margin: 0;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.corazones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.corazon {
+    font-size: 2rem;
+    animation: latirCorazon 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.6));
+}
+
+.corazon:nth-child(1) { animation-delay: 0s; }
+.corazon:nth-child(2) { animation-delay: 0.5s; }
+.corazon:nth-child(3) { animation-delay: 1s; }
+
+@keyframes aparecerMensaje {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes textoArcoiris {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes pulsarTexto {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes latirCorazon {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.6));
+    }
+    50% { 
+        transform: scale(1.3) rotate(5deg);
+        filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.9));
+    }
+}
+
+/* Girasol contenedor */
+.girasol-contenedor {
+    position: relative;
+    animation: crecerGirasol 3s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes crecerGirasol {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Girasol principal */
+.girasol {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    animation: girarGirasol 20s linear infinite, respirarGirasol 4s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes girarGirasol {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes respirarGirasol {
+    0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3)) brightness(1);
+    }
+    50% { 
+        transform: scale(1.05);
+        filter: drop-shadow(0 15px 30px rgba(255, 215, 0, 0.4)) brightness(1.1);
+    }
+}
+
+/* Centro del girasol */
+.centro-girasol {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, 
+        #8B4513 0%, 
+        #A0522D 20%, 
+        #654321 50%, 
+        #3E2723 80%, 
+        #1C0A00 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    box-shadow: 
+        inset -15px -15px 30px rgba(0, 0, 0, 0.6),
+        inset 10px 10px 20px rgba(160, 82, 45, 0.3),
+        0 0 20px rgba(139, 69, 19, 0.4);
+    animation: pulsarCentro 3s ease-in-out infinite;
+}
+
+.semillas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, #2F1B14 2px, transparent 2px),
+        radial-gradient(circle at 40% 30%, #2F1B14 1.5px, transparent 1.5px),
+        radial-gradient(circle at 60% 40%, #2F1B14 2px, transparent 2px),
+        radial-gradient(circle at 30% 60%, #2F1B14 1.5px, transparent 1.5px),
+        radial-gradient(circle at 70% 70%, #2F1B14 2px, transparent 2px);
+    background-size: 25px 25px, 20px 20px, 25px 25px, 20px 20px, 25px 25px;
+}
+
+@keyframes pulsarCentro {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.02); }
+}
+
+/* Pétalos */
+.petalos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.petalo {
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    background: linear-gradient(45deg, 
+        #FFD700 0%, 
+        #FFA500 30%, 
+        #FF8C00 60%, 
+        #FF7F00 100%);
+    border-radius: 50% 100% 50% 100%;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 50%;
+    transform: rotate(calc(var(--i) * 18deg)) translateX(90px) rotate(15deg);
+    box-shadow: 
+        inset -8px 0 15px rgba(0, 0, 0, 0.2),
+        0 3px 10px rgba(255, 140, 0, 0.3);
+    animation: ondularPetalo 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+.petalo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        transparent 50%);
+    border-radius: inherit;
+}
+
+@keyframes ondularPetalo {
+    0%, 100% { 
+        transform: rotate(calc(var(--i) * 18deg)) translateX(90px) rotate(15deg) scaleY(1);
+    }
+    25% { 
+        transform: rotate(calc(var(--i) * 18deg)) translateX(92px) rotate(18deg) scaleY(1.1);
+    }
+    75% { 
+        transform: rotate(calc(var(--i) * 18deg)) translateX(88px) rotate(12deg) scaleY(0.9);
+    }
+}
+
+/* Tallo */
+.tallo {
+    width: 15px;
+    height: 250px;
+    background: linear-gradient(to right, 
+        #228B22 0%, 
+        #32CD32 50%, 
+        #228B22 100%);
+    position: relative;
+    margin: 0 auto;
+    margin-top: -30px;
+    border-radius: 8px;
+    box-shadow: 
+        inset -3px 0 8px rgba(0, 0, 0, 0.3),
+        3px 0 10px rgba(34, 139, 34, 0.2);
+    animation: mecerTallo 6s ease-in-out infinite;
+    align-self: center;
+}
+
+@keyframes mecerTallo {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+}
+
+/* Hojas */
+.hoja {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(45deg, 
+        #228B22 0%, 
+        #32CD32 50%, 
+        #006400 100%);
+    border-radius: 100% 0;
+    box-shadow: 
+        inset -5px -5px 10px rgba(0, 0, 0, 0.3),
+        2px 2px 8px rgba(34, 139, 34, 0.2);
+}
+
+.hoja-izq {
+    top: 100px;
+    left: -45px;
+    transform: rotate(-30deg);
+    animation: balancearHoja 4s ease-in-out infinite;
+}
+
+.hoja-der {
+    top: 160px;
+    right: -45px;
+    transform: rotate(30deg) scaleX(-1);
+    animation: balancearHoja 4s ease-in-out infinite reverse;
+}
+
+@keyframes balancearHoja {
+    0%, 100% { transform: rotate(-30deg) scale(1); }
+    50% { transform: rotate(-25deg) scale(1.05); }
+}
+}
+
+/* Partículas flotantes */
+.particulas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particula {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    animation: flotarParticula 8s ease-in-out infinite;
+    opacity: 0;
+}
+
+.particula:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particula:nth-child(2) {
+    left: 30%;
+    animation-delay: 1.6s;
+}
+
+.particula:nth-child(3) {
+    left: 50%;
+    animation-delay: 3.2s;
+}
+
+.particula:nth-child(4) {
+    left: 70%;
+    animation-delay: 4.8s;
+}
+
+.particula:nth-child(5) {
+    left: 90%;
+    animation-delay: 6.4s;
+}
+
+@keyframes flotarParticula {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Efectos de fondo mágicos */
+.efectos-fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Escarcha brillante */
+.escarcha {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.copo {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    animation: caerEscarcha 15s linear infinite;
+}
+
+.copo::before {
+    content: '❄';
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+}
+
+.copo-1 { left: 5%; animation-delay: 0s; }
+.copo-2 { left: 15%; animation-delay: 2s; font-size: 8px; }
+.copo-3 { left: 25%; animation-delay: 4s; font-size: 10px; }
+.copo-4 { left: 35%; animation-delay: 6s; }
+.copo-5 { left: 45%; animation-delay: 8s; font-size: 14px; }
+.copo-6 { left: 55%; animation-delay: 10s; font-size: 9px; }
+.copo-7 { left: 65%; animation-delay: 12s; }
+.copo-8 { left: 75%; animation-delay: 1s; font-size: 11px; }
+.copo-9 { left: 85%; animation-delay: 3s; font-size: 13px; }
+.copo-10 { left: 95%; animation-delay: 5s; font-size: 7px; }
+
+@keyframes caerEscarcha {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Estrellas brillantes */
+.estrellas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.estrella {
+    position: absolute;
+    font-size: 16px;
+    animation: brillarEstrella 3s ease-in-out infinite;
+}
+
+.estrella-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.estrella-2 { top: 20%; left: 80%; animation-delay: 0.5s; }
+.estrella-3 { top: 30%; left: 60%; animation-delay: 1s; }
+.estrella-4 { top: 50%; left: 15%; animation-delay: 1.5s; }
+.estrella-5 { top: 60%; left: 85%; animation-delay: 2s; }
+.estrella-6 { top: 70%; left: 40%; animation-delay: 2.5s; }
+.estrella-7 { top: 80%; left: 20%; animation-delay: 1.2s; }
+.estrella-8 { top: 90%; left: 70%; animation-delay: 0.8s; }
+
+@keyframes brillarEstrella {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+    50% {
+        transform: scale(1.3) rotate(180deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+    }
+}
+
+/* Burbujas flotantes */
+.burbujas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.burbuja {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: flotarBurbuja 20s ease-in-out infinite;
+}
+
+.burbuja-1 {
+    width: 30px;
+    height: 30px;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.burbuja-2 {
+    width: 20px;
+    height: 20px;
+    left: 40%;
+    animation-delay: 3s;
+}
+
+.burbuja-3 {
+    width: 25px;
+    height: 25px;
+    left: 60%;
+    animation-delay: 6s;
+}
+
+.burbuja-4 {
+    width: 15px;
+    height: 15px;
+    left: 80%;
+    animation-delay: 9s;
+}
+
+.burbuja-5 {
+    width: 35px;
+    height: 35px;
+    left: 10%;
+    animation-delay: 12s;
+}
+
+.burbuja-6 {
+    width: 18px;
+    height: 18px;
+    left: 70%;
+    animation-delay: 15s;
+}
+
+@keyframes flotarBurbuja {
+    0% {
+        transform: translateY(100vh) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateY(90vh) scale(1) rotate(45deg);
+    }
+    90% {
+        opacity: 0.8;
+        transform: translateY(10vh) scale(1.2) rotate(315deg);
+    }
+    100% {
+        transform: translateY(-10vh) scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Rayos de luz */
+.rayos-luz {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.rayo {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(to bottom, 
+        transparent, 
+        rgba(255, 215, 0, 0.3), 
+        rgba(255, 255, 255, 0.6), 
+        rgba(255, 215, 0, 0.3), 
+        transparent);
+    animation: moverRayo 8s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+.rayo-1 {
+    top: 20%;
+    left: 30%;
+    animation-delay: 0s;
+}
+
+.rayo-2 {
+    top: 40%;
+    left: 70%;
+    animation-delay: 2.5s;
+}
+
+.rayo-3 {
+    top: 60%;
+    left: 50%;
+    animation-delay: 5s;
+}
+
+@keyframes moverRayo {
+    0%, 100% {
+        transform: rotate(-10deg) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: rotate(10deg) scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* Efectos responsive mejorados */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        gap: 15px;
+        max-width: 100%;
+    }
+    
+    .control-musica {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .btn-musica {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .texto-amor {
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+    }
+    
+    .corazones {
+        gap: 15px;
+    }
+    
+    .corazon {
+        font-size: 1.8rem;
+    }
+    
+    .girasol {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .centro-girasol {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .petalo {
+        width: 65px;
+        height: 25px;
+        transform: rotate(calc(var(--i) * 18deg)) translateX(75px) rotate(15deg);
+    }
+    
+    .tallo {
+        height: 180px;
+        margin-top: -25px;
+        width: 12px;
+    }
+    
+    .hoja {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .hoja-izq {
+        top: 80px;
+        left: -35px;
+    }
+    
+    .hoja-der {
+        top: 120px;
+        right: -35px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 10px;
+        gap: 10px;
+        height: 100vh;
+        justify-content: space-evenly;
+    }
+    
+    .control-musica {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .btn-musica {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .mensaje-romantico {
+        margin-bottom: 5px;
+    }
+    
+    .texto-amor {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        line-height: 1.2;
+    }
+    
+    .corazones {
+        gap: 12px;
+        margin-top: 5px;
+    }
+    
+    .corazon {
+        font-size: 1.5rem;
+    }
+    
+    .girasol {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .centro-girasol {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .petalo {
+        width: 55px;
+        height: 20px;
+        transform: rotate(calc(var(--i) * 18deg)) translateX(60px) rotate(15deg);
+    }
+    
+    .tallo {
+        height: 150px;
+        margin-top: -20px;
+        width: 10px;
+    }
+    
+    .hoja {
+        width: 40px;
+        height: 20px;
+    }
+    
+    .hoja-izq {
+        top: 60px;
+        left: -28px;
+    }
+    
+    .hoja-der {
+        top: 90px;
+        right: -28px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .texto-amor {
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .corazones {
+        gap: 10px;
+    }
+    
+    .corazon {
+        font-size: 1.3rem;
+    }
+    
+    .girasol {
+        width: 170px;
+        height: 170px;
+    }
+    
+    .centro-girasol {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .petalo {
+        width: 48px;
+        height: 18px;
+        transform: rotate(calc(var(--i) * 18deg)) translateX(50px) rotate(15deg);
+    }
+    
+    .tallo {
+        height: 120px;
+        margin-top: -15px;
+        width: 8px;
+    }
+    
+    .hoja {
+        width: 35px;
+        height: 18px;
+    }
+    
+    .hoja-izq {
+        top: 50px;
+        left: -25px;
+    }
+    
+    .hoja-der {
+        top: 75px;
+        right: -25px;
+    }
+}
+
+/* Orientación horizontal en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        height: 100vh;
+    }
+    
+    .mensaje-romantico {
+        flex: 1;
+        max-width: 300px;
+    }
+    
+    .girasol-contenedor {
+        flex: 1;
+        max-width: 300px;
+    }
+    
+    .texto-amor {
+        font-size: 2rem;
+    }
+    
+    .girasol {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .tallo {
+        height: 100px;
+        margin-top: -15px;
+    }
+}
+
+/* Mejoras de rendimiento y alineación */
+.girasol, .petalo, .centro-girasol {
+    will-change: transform;
+}
+
+.girasol {
+    margin: 0 auto;
+    display: block;
+}
+
+.centro-girasol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Optimizaciones para móviles */
+@media (max-width: 768px) {
+    .girasol {
+        animation-duration: 25s; /* Rotación más lenta en móviles */
+    }
+    
+    .petalo {
+        animation-duration: 5s; /* Animación más suave */
+    }
+    
+    .texto-amor {
+        animation-duration: 4s; /* Pulso más lento */
+    }
+    
+    /* Reducir efectos en móviles para mejor rendimiento */
+    .copo {
+        font-size: 8px;
+    }
+    
+    .estrella {
+        font-size: 12px;
+    }
+    
+    .burbuja {
+        transform: scale(0.7);
+    }
+    
+    .rayo {
+        opacity: 0.6;
+    }
+}
+
+/* Mejoras de touch para móviles */
+@media (hover: none) and (pointer: coarse) {
+    .girasol {
+        animation-duration: 30s; /* Aún más lenta en dispositivos touch */
+    }
+    
+    .particulas {
+        display: none; /* Ocultar partículas en dispositivos con recursos limitados */
+    }
+    
+    .fondoMovimiento {
+        animation-duration: 12s; /* Fondo más lento */
+    }
+    
+    /* Simplificar efectos en dispositivos touch */
+    .escarcha .copo:nth-child(n+6) {
+        display: none; /* Mostrar menos copos */
+    }
+    
+    .estrellas .estrella:nth-child(n+5) {
+        display: none; /* Mostrar menos estrellas */
+    }
+    
+    .burbujas .burbuja:nth-child(n+4) {
+        display: none; /* Mostrar menos burbujas */
+    }
+    
+    .rayos-luz {
+        display: none; /* Ocultar rayos en dispositivos touch */
+    }
+}
+
+/* Efectos adicionales para navegadores modernos */
+@supports (backdrop-filter: blur(10px)) {
+    .mensaje-romantico {
+        backdrop-filter: blur(5px);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 10px;
+    }
+    
+    @media (max-width: 480px) {
+        .mensaje-romantico {
+            padding: 15px;
+            margin: 5px;
+            border-radius: 15px;
+        }
+    }
+}
